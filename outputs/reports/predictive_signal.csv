@@ -1,0 +1,7 @@
+district,lag_months,pearson_r,p_value,n_obs
+Gulu,2,0.4692,0.0,151
+Gulu,3,0.4308,0.0,150
+Arua,2,0.3352,0.0345,40
+Arua,3,0.2927,0.0706,39
+Lira,2,0.3585,0.0,164
+Lira,3,0.4019,0.0,163

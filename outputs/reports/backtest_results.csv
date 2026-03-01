@@ -1,0 +1,16 @@
+event_label,district,mean_dars_during,mean_dars_outside,signal_lift,high_risk_rate_during,high_risk_rate_baseline,dars_comparability_flag
+2016-2017_drought,Gulu,9.62,15.13,0.636,0.105,0.274,full_components
+2016-2017_drought,Arua,10.94,14.1,0.775,0.158,0.268,missing_price_component
+2016-2017_drought,Lira,12.5,14.25,0.877,0.158,0.268,full_components
+2016-2017_drought,Oyam,12.7,14.47,0.878,0.211,0.255,missing_price_component
+2016-2017_drought,Nebbi,8.48,15.81,0.537,0.105,0.274,missing_price_component
+2020_COVID_disruption,Gulu,19.98,13.49,1.481,0.438,0.225,full_components
+2020_COVID_disruption,Arua,22.96,12.46,1.843,0.5,0.212,missing_price_component
+2020_COVID_disruption,Lira,19.84,13.02,1.523,0.375,0.231,full_components
+2020_COVID_disruption,Oyam,24.76,12.56,1.971,0.562,0.212,missing_price_component
+2020_COVID_disruption,Nebbi,25.62,13.25,1.934,0.562,0.212,missing_price_component
+2022-2023_inflation_shock,Gulu,28.54,12.26,2.328,0.667,0.19,full_components
+2022-2023_inflation_shock,Arua,25.23,11.98,2.106,0.5,0.203,missing_price_component
+2022-2023_inflation_shock,Lira,31.31,11.56,2.708,0.833,0.171,full_components
+2022-2023_inflation_shock,Oyam,27.55,12.01,2.295,0.778,0.177,missing_price_component
+2022-2023_inflation_shock,Nebbi,25.31,13.06,1.938,0.5,0.203,missing_price_component

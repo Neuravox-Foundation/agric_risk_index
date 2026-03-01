@@ -1,0 +1,4 @@
+data_cleaned/2023-Statistical-Abstract.pdf
+__pycache__/
+*.pyc
+.DS_Store

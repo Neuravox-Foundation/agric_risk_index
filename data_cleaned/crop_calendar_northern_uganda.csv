@@ -1,0 +1,10 @@
+region,applicable_districts,commodity,season,planting_start_month,planting_end_month,growing_months,harvest_start_month,harvest_end_month,cycle_days_approx,source,data_quality,notes
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira, Adjumani",Maize,Main (unimodal),3,4,"5,6,7",7,9,120,FAO GIEWS; FEWS NET; USDA/FAS,compiled_from_multiple_sources,Northern Uganda unimodal zone. Some early planting in Feb in wetter areas.
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira, Adjumani",Beans,First season,3,4,"4,5",6,7,90,FAO GIEWS; FEWS NET,compiled_from_multiple_sources,Short-cycle crop; first rains season.
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira, Adjumani",Beans,Second season,8,9,"9,10",11,12,90,FAO GIEWS; FEWS NET,compiled_from_multiple_sources,Second rains; less reliable in far north.
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira",Rice (upland),Main (unimodal),4,5,"5,6,7",8,9,120,NARO; FAO,compiled_from_multiple_sources,Upland rice (NERICA varieties) grown in northern zone.
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira, Adjumani",Groundnuts,First season,3,4,"4,5,6",6,7,105,FAO; NARO; FEWS NET,compiled_from_multiple_sources,Major groundnut-producing region.
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira, Adjumani",Groundnuts,Second season,8,9,"9,10,11",11,12,105,FAO; NARO; FEWS NET,compiled_from_multiple_sources,Second rains planting; lower yields than first season.
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira, Adjumani",Cassava,Main planting,3,5,"4,5,6,7,8,9,10,11,12,1,2",12,3,300,FAO; NARO; UBOS,compiled_from_multiple_sources,Long cycle crop (9-12 months). Harvested as needed. Key food security crop in north.
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira, Adjumani",Sorghum,Main (unimodal),3,4,"4,5,6,7",7,9,120,FAO GIEWS; FEWS NET,compiled_from_multiple_sources,Drought-tolerant; important in drier northern areas.
+Northern Uganda,"Gulu, Oyam, Arua, Nebbi, Lira, Adjumani",Finger Millet,Main (unimodal),3,4,"4,5,6,7",7,8,110,FAO; NARO,compiled_from_multiple_sources,Traditional staple in northern Uganda.

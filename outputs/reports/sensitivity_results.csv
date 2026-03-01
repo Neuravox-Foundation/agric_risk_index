@@ -1,0 +1,6 @@
+district,corr_equal_vs_config,corr_equal_vs_no_icpi,corr_config_vs_no_icpi,n_obs,robust_flag
+Gulu,0.9786,0.9294,0.9848,180,robust
+Arua,0.9718,0.9015,0.977,180,robust
+Lira,0.9812,0.9371,0.9862,180,robust
+Oyam,0.9822,0.9296,0.9812,180,robust
+Nebbi,0.9794,0.9252,0.9819,180,robust

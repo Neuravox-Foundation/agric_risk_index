@@ -1,0 +1,34 @@
+date,year,month,country,district,geographic_level,event_type,severity,people_affected_est,source,notes
+2007-08-01,2007,8,Uganda,Gulu,district,Flood,Major,50000,EM-DAT; ReliefWeb,Severe flooding across northern Uganda during rainy season
+2007-09-01,2007,9,Uganda,Lira,district,Flood,Major,30000,EM-DAT; ReliefWeb,Lango sub-region flooding
+2008-01-01,2008,1,Uganda,Gulu,district,Drought,Moderate,40000,FEWS NET; WFP,Dry spell affecting first season planting
+2010-01-01,2010,1,Uganda,Oyam,district,Drought,Major,60000,FEWS NET,Extended dry season across Lango sub-region
+2010-08-01,2010,8,Uganda,Arua,district,Flood,Moderate,15000,ReliefWeb; OCHA,West Nile region flooding
+2012-07-01,2012,7,Uganda,Gulu,district,Flood,Moderate,20000,NEMA; ReliefWeb,Flash flooding during peak rainy season
+2013-09-01,2013,9,Uganda,Nebbi,district,Flood,Moderate,10000,ReliefWeb,Lake Albert area flooding
+2015-01-01,2015,1,Uganda,Arua,district,Displacement (refugee influx),Major,100000,UNHCR; ReliefWeb,South Sudan refugee influx into West Nile
+2015-10-01,2015,10,Uganda,Gulu,district,Flood,Moderate,12000,NEMA; ReliefWeb,Late season flooding
+2016-05-01,2016,5,Uganda,Arua,district,Flood,Moderate,8000,Uganda Red Cross,Early season floods
+2016-07-01,2016,7,Uganda,Adjumani,district,Displacement (refugee influx),Major,150000,UNHCR,South Sudan crisis; Adjumani settlements
+2016-07-01,2016,7,Uganda,Arua,district,Displacement (refugee influx),Major,200000,UNHCR,"Massive South Sudan refugee influx; Rhino Camp, Imvepi"
+2016-12-01,2016,12,Uganda,Gulu,district,Drought,Major,45000,FEWS NET; WFP,El Nino-related drought across north
+2016-12-01,2016,12,Uganda,Arua,district,Drought,Major,50000,FEWS NET; WFP,El Nino-related drought
+2016-12-01,2016,12,Uganda,Nebbi,district,Drought,Major,35000,FEWS NET; WFP,El Nino-related drought
+2017-01-01,2017,1,Uganda,Arua,district,Displacement (refugee influx),Major,250000,UNHCR,Continued South Sudan displacement
+2017-03-01,2017,3,Uganda,Oyam,district,Drought,Moderate,30000,FEWS NET,Delayed onset of rains
+2017-04-01,2017,4,Uganda,Oyam,district,Pest/disease,Major,30000,FAO; MAAIF,Fall armyworm outbreak
+2017-04-01,2017,4,Uganda,Gulu,district,Pest/disease,Major,40000,FAO; MAAIF,Fall armyworm first detected in Uganda; severe maize damage
+2019-03-01,2019,3,Uganda,Gulu,district,Drought,Moderate,25000,FEWS NET,Below-average first season rains
+2019-10-01,2019,10,Uganda,Gulu,district,Flood,Major,25000,OCHA; ReliefWeb,Heavy rainfall-induced flooding
+2019-11-01,2019,11,Uganda,Nebbi,district,Flood,Major,18000,OCHA; ReliefWeb,Lake Albert rising water levels
+2020-02-01,2020,2,Uganda,Arua,district,Pest/disease,Moderate,15000,FAO,Desert locust threat (limited impact in far north)
+2020-05-01,2020,5,Uganda,Gulu,district,Flood,Major,35000,NEMA; ReliefWeb,Lake Kyoga basin flooding; record water levels
+2020-06-01,2020,6,Uganda,Oyam,district,Flood,Major,20000,NEMA; ReliefWeb,Lake Kyoga basin flooding
+2020-07-01,2020,7,Uganda,Nebbi,district,Flood,Major,15000,NEMA; ReliefWeb,Lake Albert flooding
+2021-09-01,2021,9,Uganda,Arua,district,Flood,Moderate,10000,ReliefWeb,West Nile flooding
+2022-03-01,2022,3,Uganda,Gulu,district,Pest/disease,Moderate,15000,MAAIF; NARO,Fall armyworm outbreak affecting maize
+2022-06-01,2022,6,Uganda,Oyam,district,Drought,Moderate,20000,FEWS NET,Mid-season dry spell affecting crop development
+2022-08-01,2022,8,Uganda,Gulu,district,Flood,Moderate,12000,NEMA; FEWS NET,Seasonal flooding
+2023-05-01,2023,5,Uganda,Arua,district,Flood,Moderate,8000,NEMA; ReliefWeb,West Nile flooding
+2023-07-01,2023,7,Uganda,Gulu,district,Drought,Moderate,30000,FEWS NET; WFP,Below-average rainfall in northern corridor
+2024-10-01,2024,10,Uganda,Gulu,district,Flood,Moderate,15000,ReliefWeb; media reports,Late season heavy rains

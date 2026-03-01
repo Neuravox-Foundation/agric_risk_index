@@ -1,0 +1,65 @@
+dataset,variable,type,description,unit,notes
+commodity_prices_northern_uganda.csv,date,date,Price observation date,YYYY-MM-DD,Typically 15th of each month
+commodity_prices_northern_uganda.csv,district,string,Administrative district name,,WFP admin1 level
+commodity_prices_northern_uganda.csv,sub_county,string,Sub-county or admin2 name,,
+commodity_prices_northern_uganda.csv,market,string,Market name,,Physical market location
+commodity_prices_northern_uganda.csv,commodity,string,Commodity name,,Maize/Beans/Rice/Cassava/Sorghum/Millet
+commodity_prices_northern_uganda.csv,price_local,float,Price in local currency,UGX,Uganda Shilling
+commodity_prices_northern_uganda.csv,price_usd,float,Price in US dollars,USD,Exchange rate applied by WFP
+commodity_prices_northern_uganda.csv,unit,string,Unit of measurement,,KG or other
+commodity_prices_northern_uganda.csv,price_type,string,Wholesale or Retail,,
+commodity_prices_northern_uganda.csv,price_flag,string,Data quality flag,,actual or estimated
+commodity_prices_northern_uganda.csv,currency,string,Currency code,,UGX
+climate_data_northern_uganda.csv,date,date,First day of month,YYYY-MM-DD,
+climate_data_northern_uganda.csv,year,integer,Year,,
+climate_data_northern_uganda.csv,month,integer,Month number (1-12),,
+climate_data_northern_uganda.csv,district,string,District name,,
+climate_data_northern_uganda.csv,latitude,float,District centroid latitude,degrees,Approximate
+climate_data_northern_uganda.csv,longitude,float,District centroid longitude,degrees,Approximate
+climate_data_northern_uganda.csv,rainfall_mm,float,Total monthly precipitation,mm,NASA POWER PRECTOTCORR parameter
+climate_data_northern_uganda.csv,temperature_mean_c,float,Mean monthly temperature at 2m,Celsius,NASA POWER T2M parameter
+climate_data_northern_uganda.csv,temperature_max_c,float,Max monthly temperature at 2m,Celsius,NASA POWER T2M_MAX parameter
+climate_data_northern_uganda.csv,temperature_min_c,float,Min monthly temperature at 2m,Celsius,NASA POWER T2M_MIN parameter
+crop_production_uganda.csv,year,integer,Production year,,
+crop_production_uganda.csv,commodity,string,Crop name,,Maize/Beans/Rice/Groundnuts/Cassava
+crop_production_uganda.csv,area_harvested_ha,float,Area harvested,hectares,National total
+crop_production_uganda.csv,production_tonnes,float,Production volume,tonnes,National total
+crop_production_uganda.csv,yield_kg_per_ha,float,Yield estimate,kg/ha,National average
+crop_production_uganda.csv,source,string,Data source,,FAOSTAT
+crop_calendar_northern_uganda.csv,region,string,Geographic region,,Northern Uganda
+crop_calendar_northern_uganda.csv,applicable_districts,string,Comma-separated district names,,
+crop_calendar_northern_uganda.csv,commodity,string,Crop name,,
+crop_calendar_northern_uganda.csv,season,string,Growing season name,,Main/First/Second
+crop_calendar_northern_uganda.csv,planting_start_month,integer,Planting start month (1-12),,
+crop_calendar_northern_uganda.csv,planting_end_month,integer,Planting end month (1-12),,
+crop_calendar_northern_uganda.csv,harvest_start_month,integer,Harvest start month (1-12),,
+crop_calendar_northern_uganda.csv,harvest_end_month,integer,Harvest end month (1-12),,
+crop_calendar_northern_uganda.csv,cycle_days_approx,integer,Approximate crop cycle length,days,
+conflict_events_uganda.csv,date,date,First day of month,YYYY-MM-DD,
+conflict_events_uganda.csv,year,integer,Year,,
+conflict_events_uganda.csv,month,integer,Month number (1-12),,
+conflict_events_uganda.csv,event_category,string,Type of conflict event,,political_violence/civilian_targeting/demonstrations
+conflict_events_uganda.csv,event_count,integer,Number of events in month,,
+conflict_events_uganda.csv,fatalities,integer,Number of fatalities in month,,May be NA
+conflict_events_uganda.csv,geographic_level,string,Geographic resolution,,national
+conflict_events_uganda.csv,country,string,Country name,,Uganda
+conflict_events_uganda.csv,source,string,Data source,,ACLED via HDX
+disaster_shock_events_northern_uganda.csv,date,date,Event date (approx),YYYY-MM-DD,First of month
+disaster_shock_events_northern_uganda.csv,year,integer,Year,,
+disaster_shock_events_northern_uganda.csv,month,integer,Month,,
+disaster_shock_events_northern_uganda.csv,district,string,Affected district,,
+disaster_shock_events_northern_uganda.csv,event_type,string,Type of shock/disaster,,Flood/Drought/Displacement/Pest
+disaster_shock_events_northern_uganda.csv,severity,string,Severity rating,,Major/Moderate
+disaster_shock_events_northern_uganda.csv,people_affected_est,integer,Estimated people affected,,Approximate
+disaster_shock_events_northern_uganda.csv,source,string,Data source(s),,
+disaster_shock_events_northern_uganda.csv,notes,string,Additional context,,
+input_costs_uganda.csv,year,integer,Year,,
+input_costs_uganda.csv,date,date,Reference date,YYYY-MM-DD,January 1 of year
+input_costs_uganda.csv,district,string,Geographic scope,,National or Northern Uganda
+input_costs_uganda.csv,item,string,Input item name,,Fertilizer/Seed/Transport
+input_costs_uganda.csv,value,float,Numeric value,,
+input_costs_uganda.csv,unit,string,Unit of measurement,,metric_tonnes/USD_per_tonne/UGX_per_kg
+input_costs_uganda.csv,data_type,string,Type of data point,,import_volume/price_estimate/cost_estimate
+input_costs_uganda.csv,source,string,Data source,,
+input_costs_uganda.csv,data_quality,string,Quality indicator,,official_trade_data/estimated_from_reports
+input_costs_uganda.csv,notes,string,Additional context,,

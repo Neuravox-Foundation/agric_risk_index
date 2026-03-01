@@ -1,0 +1,47 @@
+dataset,district,commodity,date_min,date_max,n_months,completeness_pct,notes
+commodity_prices_northern_uganda.csv,Adjumani,Beans,2020-12-15,2025-12-15,52,28.9,
+commodity_prices_northern_uganda.csv,Adjumani,Cassava (fresh),2020-12-15,2025-12-15,32,17.8,
+commodity_prices_northern_uganda.csv,Adjumani,Maize (white),2021-01-15,2025-12-15,49,27.2,
+commodity_prices_northern_uganda.csv,Adjumani,Maize flour,2020-12-15,2025-12-15,61,33.9,
+commodity_prices_northern_uganda.csv,Adjumani,Sorghum,2020-12-15,2025-12-15,60,33.3,
+commodity_prices_northern_uganda.csv,Arua,Beans,2020-12-15,2025-12-15,61,33.9,pilot_district
+commodity_prices_northern_uganda.csv,Arua,Cassava (fresh),2020-12-15,2025-12-15,40,22.2,pilot_district
+commodity_prices_northern_uganda.csv,Arua,Cassava flour,2021-10-15,2025-12-15,16,8.9,pilot_district
+commodity_prices_northern_uganda.csv,Arua,Maize (white),2020-12-15,2025-12-15,60,33.3,pilot_district
+commodity_prices_northern_uganda.csv,Arua,Maize flour,2020-12-15,2025-12-15,61,33.9,pilot_district
+commodity_prices_northern_uganda.csv,Arua,Millet,2021-10-15,2025-07-15,12,6.7,pilot_district
+commodity_prices_northern_uganda.csv,Arua,Sorghum,2020-12-15,2025-12-15,60,33.3,pilot_district
+commodity_prices_northern_uganda.csv,Gulu,Beans,2011-04-15,2025-12-15,166,92.2,pilot_district
+commodity_prices_northern_uganda.csv,Gulu,Cassava flour,2010-01-15,2025-12-15,146,81.1,pilot_district
+commodity_prices_northern_uganda.csv,Gulu,Maize (white),2011-04-15,2025-11-15,138,76.7,pilot_district
+commodity_prices_northern_uganda.csv,Gulu,Maize flour,2010-02-15,2025-11-15,114,63.3,pilot_district
+commodity_prices_northern_uganda.csv,Gulu,Millet,2011-05-15,2025-12-15,109,60.6,pilot_district
+commodity_prices_northern_uganda.csv,Gulu,Sorghum,2011-04-15,2025-12-15,164,91.1,pilot_district
+commodity_prices_northern_uganda.csv,Lira,Beans,2008-06-15,2025-12-15,197,109.4,pilot_district
+commodity_prices_northern_uganda.csv,Lira,Cassava flour,2010-01-15,2025-12-15,148,82.2,pilot_district
+commodity_prices_northern_uganda.csv,Lira,Maize,2006-02-15,2022-05-15,147,81.7,pilot_district
+commodity_prices_northern_uganda.csv,Lira,Maize (white),2011-04-15,2025-11-15,127,70.6,pilot_district
+commodity_prices_northern_uganda.csv,Lira,Maize flour,2010-01-15,2025-12-15,127,70.6,pilot_district
+commodity_prices_northern_uganda.csv,Lira,Millet,2011-05-15,2025-12-15,92,51.1,pilot_district
+commodity_prices_northern_uganda.csv,Lira,Sorghum,2011-04-15,2025-12-15,163,90.6,pilot_district
+commodity_prices_northern_uganda.csv,Oyam,ALL,,,0,0.0,no_price_data
+commodity_prices_northern_uganda.csv,Nebbi,ALL,,,0,0.0,no_price_data
+climate_data_northern_uganda.csv,Adjumani,,2010-01-01,2024-12-01,180,100.0,
+climate_data_northern_uganda.csv,Arua,,2010-01-01,2024-12-01,180,100.0,pilot_district
+climate_data_northern_uganda.csv,Gulu,,2010-01-01,2024-12-01,180,100.0,pilot_district
+climate_data_northern_uganda.csv,Lira,,2010-01-01,2024-12-01,180,100.0,pilot_district
+climate_data_northern_uganda.csv,Nebbi,,2010-01-01,2024-12-01,180,100.0,pilot_district
+climate_data_northern_uganda.csv,Oyam,,2010-01-01,2024-12-01,180,100.0,pilot_district
+conflict_events_uganda.csv,national,,1997-01-01,2026-02-01,350,100.6,national_level_only
+disaster_shock_events_northern_uganda.csv,Adjumani,,2016-07-01,2016-07-01,1,,sparse_event_records
+disaster_shock_events_northern_uganda.csv,Arua,,2010-08-01,2023-05-01,9,,sparse_event_records
+disaster_shock_events_northern_uganda.csv,Gulu,,2007-08-01,2024-10-01,13,,sparse_event_records
+disaster_shock_events_northern_uganda.csv,Lira,,2007-09-01,2007-09-01,1,,sparse_event_records
+disaster_shock_events_northern_uganda.csv,Nebbi,,2013-09-01,2020-07-01,4,,sparse_event_records
+disaster_shock_events_northern_uganda.csv,Oyam,,2010-01-01,2022-06-01,5,,sparse_event_records
+crop_production_uganda.csv,national,Beans (dry),1961,2024,64,,FAOSTAT_national_annual
+crop_production_uganda.csv,national,Cassava,1961,2024,64,,FAOSTAT_national_annual
+crop_production_uganda.csv,national,Groundnuts,1961,2024,64,,FAOSTAT_national_annual
+crop_production_uganda.csv,national,Maize,1961,2024,64,,FAOSTAT_national_annual
+crop_production_uganda.csv,national,Rice,1961,2024,64,,FAOSTAT_national_annual
+input_costs_uganda.csv,national,,2018,2024,96,,national_annual
