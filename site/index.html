@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DAVARS — District Agricultural Volatility and Adaptive Risk System</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.3/plotly.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+  :root {
+    --blue: #1F4E79; --blue2: #2E75B6; --green: #70AD47; --orange: #ED7D31;
+    --red: #E63946; --ink: #1a2530; --muted: #667; --line: #e2e6ea; --bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  header {
+    background: var(--blue); color: #fff; padding: 20px 28px;
+  }
+  header h1 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: .2px; }
+  header p { margin: 4px 0 0; opacity: .85; font-size: 13px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 60px; }
+  .controls {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 16px 0; position: sticky; top: 0; background: var(--bg); z-index: 5;
+  }
+  .controls label { font-size: 13px; color: var(--muted); font-weight: 600; }
+  select {
+    font-size: 14px; padding: 7px 10px; border: 1px solid var(--line);
+    border-radius: 8px; background: #fff; color: var(--ink); min-width: 140px;
+  }
+  .tabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-top: 8px; }
+  .tab {
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    padding: 10px 14px; font-size: 14px; color: var(--muted); font-weight: 600;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .panel { display: none; padding-top: 22px; }
+  .panel.active { display: block; }
+  h2 { font-size: 20px; margin: 4px 0 10px; }
+  h3 { font-size: 15px; margin: 26px 0 10px; color: var(--ink); }
+  p.lede { color: #33404d; font-size: 14.5px; max-width: 760px; }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 14px 0 8px; }
+  .metric { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .metric .k { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; }
+  .metric .v { font-size: 24px; font-weight: 700; margin-top: 4px; color: var(--blue); }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; }
+  .chart { width: 100%; height: 500px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; background: #fff; }
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { background: #f0f3f6; font-weight: 650; color: #33404d; position: sticky; top: 0; }
+  tbody tr:last-child td { border-bottom: 0; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .callout { background: #eef4fb; border: 1px solid #cfe0f3; border-radius: 12px; padding: 14px 16px; font-size: 13.5px; margin-top: 16px; color: #2b3a49; }
+  .callout b { color: var(--blue); }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+  .pill.high { background: #fdecee; color: #b3212f; }
+  .pill.normal { background: #e7f6ec; color: #1f7a3d; }
+  .pill.na { background: #f0f0f0; color: #666; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .bcard { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .bcard h4 { margin: 0 0 2px; font-size: 15px; }
+  .bcard .score { font-size: 34px; font-weight: 800; color: var(--blue); line-height: 1.1; }
+  .bcard .score.na { color: #aab; }
+  .bcard .note { margin-top: 10px; font-size: 12.5px; padding: 9px 10px; border-radius: 8px; }
+  .bcard .note.high { background: #fce4e4; } .bcard .note.normal { background: #e4fce4; } .bcard .note.na { background: #f0f0f0; }
+  .bcard .cap { font-size: 11.5px; color: var(--muted); margin-top: 6px; }
+  .btn { display: inline-block; margin-top: 18px; background: var(--blue); color: #fff; border: 0;
+         padding: 9px 16px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .foot { color: var(--muted); font-size: 12px; margin-top: 10px; }
+  @media (max-width: 720px) { .metrics { grid-template-columns: repeat(2, 1fr); } .chart { height: 420px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>DAVARS — District Agricultural Volatility and Adaptive Risk System</h1>
+  <p>Monthly agricultural risk scoring for five districts in Northern Uganda</p>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <label for="district">District</label>
+    <select id="district"></select>
+    <span class="foot" id="daterange"></span>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="overview">Overview</button>
+    <button class="tab" data-tab="risk">District Risk</button>
+    <button class="tab" data-tab="breakdown">Risk Breakdown</button>
+    <button class="tab" data-tab="validation">Validation</button>
+    <button class="tab" data-tab="bulletin">IFRAD Bulletin</button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="overview">
+    <h2>Overview</h2>
+    <p class="lede">DAVARS computes a monthly agricultural risk score (0–100) for Gulu, Arua, Lira, Oyam and
+      Nebbi. The score combines price volatility, climate stress, production instability, conflict and disaster
+      shocks, and input-cost pressure into a single composite index. When it exceeds a district-specific
+      threshold, the month is flagged high-risk — a period when deploying growth capital into youth
+      agribusinesses is statistically more likely to produce income losses.</p>
+    <div class="metrics" id="ov-metrics"></div>
+    <h3>Index Components</h3>
+    <div class="tablewrap"><table id="ov-components"></table></div>
+    <div class="callout" id="ov-limits">
+      <b>Data limitations.</b> Oyam and Nebbi have no commodity price data — their DARS scores are computed from
+      four components and flagged <code>missing_price_component</code> throughout. YII, ICPI and the conflict
+      component of SII are national-level signals applied uniformly across districts. DAVARS is a prototype
+      volatility index; it does not measure household welfare, predict specific prices, or substitute for
+      field-level enterprise assessment.
+    </div>
+  </section>
+
+  <!-- DISTRICT RISK -->
+  <section class="panel" id="risk">
+    <h2 id="risk-title">District Risk</h2>
+    <div class="metrics" id="risk-metrics"></div>
+    <h3>DARS Score Over Time</h3>
+    <div class="card"><div class="chart" id="risk-chart"></div></div>
+    <h3>Recent Data (Last 24 Months)</h3>
+    <div class="tablewrap" style="max-height:340px;overflow-y:auto"><table id="risk-table"></table></div>
+  </section>
+
+  <!-- RISK BREAKDOWN -->
+  <section class="panel" id="breakdown">
+    <h2 id="bd-title">Risk Breakdown</h2>
+    <p class="lede">Weighted contribution of each sub-index to the composite score over time (component score ×
+      weight × 100). Components sum toward the DARS score.</p>
+    <div class="card"><div class="chart" id="bd-chart"></div></div>
+    <h3>Component Summary (latest month)</h3>
+    <div class="tablewrap"><table id="bd-table"></table></div>
+    <h3>Weight Sensitivity</h3>
+    <p class="lede">How stable the score is under alternative weightings. Correlations near 1.0 mean the ranking
+      of high-risk months barely changes when weights change — the signal is robust.</p>
+    <div class="tablewrap"><table id="bd-sens"></table></div>
+  </section>
+
+  <!-- VALIDATION -->
+  <section class="panel" id="validation">
+    <h2>Validation</h2>
+    <h3>Historical shock alignment — does DARS rise during known crisis periods?</h3>
+    <div class="card"><div class="chart" id="val-chart"></div></div>
+    <h3>Backtest Results</h3>
+    <div class="tablewrap"><table id="val-table"></table></div>
+    <div class="callout">Signal lift &gt; 1.2 means DARS was at least 20% higher on average during the documented
+      shock than during non-shock months. Districts missing the price component are not directly comparable to
+      full-coverage districts.</div>
+    <h3>Lead–lag diagnostic: does the risk signal move ahead of price volatility?</h3>
+    <div class="tablewrap"><table id="val-pred"></table></div>
+    <p class="foot">A significant positive correlation at T+2 or T+3 indicates the composite signal tends to move
+      2–3 months ahead of price instability. This is a diagnostic check of co-movement, not a causal forecast.</p>
+  </section>
+
+  <!-- BULLETIN -->
+  <section class="panel" id="bulletin">
+    <h2>Current Month Risk Bulletin</h2>
+    <h3 id="bul-month" style="margin-top:6px"></h3>
+    <div class="cards" id="bul-cards"></div>
+    <button class="btn" id="bul-download">Download Bulletin CSV</button>
+    <p class="foot">Generated from the DAVARS pipeline. District scores flagged <code>missing_price_component</code>
+      (Oyam, Nebbi) are computed from four of five components and should be read with that limitation in mind.</p>
+  </section>
+</div>
+
+<script>
+const WEIGHTS = { cvi_score:0.25, csi_score:0.25, yii_score:0.20, sii_score:0.20, icpi_score:0.10 };
+const SHOCKS = [
+  { label:"2016–17 Drought", start:"2016-07-01", end:"2017-12-31" },
+  { label:"COVID Disruption", start:"2020-03-01", end:"2021-06-30" },
+  { label:"2022–23 Inflation Shock", start:"2022-01-01", end:"2023-06-30" },
+];
+const COMPONENTS = [
+  ["cvi_score","CVI — Commodity Volatility","#1F4E79"],
+  ["csi_score","CSI — Climate Stress","#2E75B6"],
+  ["yii_score","YII — Yield Instability","#70AD47"],
+  ["sii_score","SII — Shock Intensity","#ED7D31"],
+  ["icpi_score","ICPI — Input Cost Pressure","#A9A9A9"],
+];
+const PLOT_CFG = { displayModeBar:false, responsive:true };
+const PLOT_FONT = { family:"-apple-system, Segoe UI, Roboto, sans-serif", color:"#1a2530" };
+
+const fmt = (v, d=1) => (v===null||v===undefined||Number.isNaN(v)) ? "—" : Number(v).toFixed(d);
+const monthYear = s => { const [y,m]=s.split("-"); return new Date(y,m-1).toLocaleString("en",{month:"short",year:"numeric"}); };
+
+let DATA, DISTRICT;
+
+fetch("data.json").then(r=>r.json()).then(d=>{ DATA=d; init(); })
+  .catch(e=>{ document.querySelector(".wrap").insertAdjacentHTML("afterbegin",
+    "<p style='color:#b3212f'>Could not load data.json — "+e+"</p>"); });
+
+function init(){
+  DISTRICT = DATA.districts[0];
+  const sel = document.getElementById("district");
+  sel.innerHTML = DATA.districts.map(d=>`<option>${d}</option>`).join("");
+  sel.value = DISTRICT;
+  sel.onchange = () => { DISTRICT = sel.value; renderDistrict(); };
+  document.getElementById("daterange").textContent =
+    `${monthYear(DATA.summary.date_start.slice(0,7))} – ${monthYear(DATA.summary.date_end.slice(0,7))}`;
+
+  document.querySelectorAll(".tab").forEach(t => t.onclick = () => switchTab(t.dataset.tab));
+
+  renderOverview();
+  renderDistrict();
+  renderValidation();
+  renderBulletin();
+}
+
+function switchTab(id){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab===id));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active", p.id===id));
+  window.dispatchEvent(new Event("resize")); // let Plotly size charts revealed by the tab
+}
+
+/* ---------- Overview ---------- */
+function renderOverview(){
+  const s = DATA.summary;
+  document.getElementById("ov-metrics").innerHTML = [
+    ["Total Months Modelled", s.total_months.toLocaleString()],
+    ["Districts Covered", s.districts_covered],
+    ["Data Period", `${monthYear(s.date_start.slice(0,7))} – ${monthYear(s.date_end.slice(0,7))}`],
+    ["Overall High-Risk Rate", fmt(s.high_risk_rate,1)+"%"],
+  ].map(([k,v])=>`<div class="metric"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+
+  const rows = [
+    ["Commodity Volatility Index (CVI)","25%","WFP VAM price data","Gulu, Arua, Lira only"],
+    ["Climate Stress Index (CSI)","25%","NASA POWER","All districts"],
+    ["Yield Instability Index (YII)","20%","FAOSTAT national crops","All districts (national signal)"],
+    ["Shock Intensity Index (SII)","20%","ACLED + disaster records","All districts"],
+    ["Input Cost Pressure Index (ICPI)","10%","IFDC fertilizer data","All districts (national signal)"],
+  ];
+  document.getElementById("ov-components").innerHTML =
+    `<thead><tr><th>Component</th><th>Weight</th><th>Data Source</th><th>Coverage</th></tr></thead><tbody>`+
+    rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")+`</tbody>`;
+}
+
+/* ---------- District Risk + Breakdown ---------- */
+function districtRows(){ return DATA.dars.filter(r=>r.district===DISTRICT); }
+
+function renderDistrict(){
+  const dd = districtRows();
+  document.getElementById("risk-title").textContent = `District Risk — ${DISTRICT}`;
+  document.getElementById("bd-title").textContent = `Risk Breakdown — ${DISTRICT}`;
+
+  const valid = dd.filter(r=>r.dars_score!==null);
+  const latest = valid[valid.length-1];
+  const threshold = latest ? latest.dars_threshold_75p : null;
+
+  const hrPill = (f)=> f===1 ? `<span class="pill high">⬆ HIGH RISK</span>`
+    : f===0 ? `<span class="pill normal">✓ NORMAL</span>` : `<span class="pill na">— INSUFFICIENT DATA</span>`;
+  document.getElementById("risk-metrics").innerHTML = latest ? [
+    ["Current DARS Score", fmt(latest.dars_score)],
+    ["District Threshold", fmt(threshold)],
+    ["Status", hrPill(latest.high_risk_flag)],
+    ["Comparability", latest.dars_comparability_flag||"—"],
+  ].map(([k,v])=>`<div class="metric"><div class="k">${k}</div><div class="v" style="font-size:${String(v).includes("pill")?"14px":"24px"}">${v}</div></div>`).join("")
+    : `<div class="callout">No DARS data available for ${DISTRICT}.</div>`;
+
+  drawRiskChart(dd, threshold);
+  drawRiskTable(dd);
+  drawBreakdown(dd, latest);
+  drawSensitivity();
+}
+
+function contiguousBlocks(dates){
+  if(!dates.length) return [];
+  const d = dates.map(x=>new Date(x)).sort((a,b)=>a-b);
+  const blocks=[]; let start=d[0], prev=d[0];
+  for(let i=1;i<d.length;i++){
+    if((d[i]-prev)/86400000 > 45){ blocks.push([start,prev]); start=d[i]; }
+    prev=d[i];
+  }
+  blocks.push([start,prev]); return blocks;
+}
+const shift=(dt,days)=>{ const x=new Date(dt); x.setDate(x.getDate()+days); return x.toISOString().slice(0,10); };
+
+function drawRiskChart(dd, threshold){
+  const x = dd.map(r=>r.date);
+  const shapes=[], annotations=[];
+  if(threshold!==null){
+    shapes.push({type:"line", x0:x[0], x1:x[x.length-1], y0:threshold, y1:threshold,
+      line:{color:"#E63946", width:1.5, dash:"dash"}});
+    annotations.push({x:x[x.length-1], y:threshold, xanchor:"right", yanchor:"bottom",
+      text:`Risk Threshold (${fmt(threshold)})`, showarrow:false, font:{color:"#E63946", size:11}});
+  }
+  contiguousBlocks(dd.filter(r=>r.high_risk_flag===1).map(r=>r.date)).forEach(([s,e])=>{
+    shapes.push({type:"rect", xref:"x", yref:"paper", x0:shift(s,-15), x1:shift(e,15),
+      y0:0, y1:1, fillcolor:"rgba(230,57,70,0.15)", line:{width:0}, layer:"below"});
+  });
+  SHOCKS.forEach(ev=>{
+    shapes.push({type:"rect", xref:"x", yref:"paper", x0:ev.start, x1:ev.end,
+      y0:0, y1:1, fillcolor:"rgba(150,150,150,0.12)", line:{width:0}, layer:"below"});
+    const mid = new Date((new Date(ev.start).getTime()+new Date(ev.end).getTime())/2).toISOString().slice(0,10);
+    annotations.push({x:mid, y:100, yanchor:"top", text:ev.label, showarrow:false, font:{size:9, color:"grey"}});
+  });
+
+  const trace = {
+    x, y: dd.map(r=>r.dars_score), mode:"lines", name:"DARS Score",
+    line:{color:"#1F4E79", width:2}, connectgaps:false,
+    customdata: dd.map(r=>[r.high_risk_flag, r.n_components_used, r.dars_comparability_flag]),
+    hovertemplate:"<b>%{x|%b %Y}</b><br>DARS: %{y:.1f}<br>High Risk: %{customdata[0]}"+
+      "<br>Components: %{customdata[1]}<br>Flag: %{customdata[2]}<extra></extra>",
+  };
+  Plotly.react("risk-chart", [trace], {
+    font:PLOT_FONT, margin:{t:20,r:16,b:40,l:48}, height:500,
+    yaxis:{range:[0,105], title:"DARS Score"}, xaxis:{title:"Date"},
+    shapes, annotations, showlegend:true, legend:{x:0.01,y:0.99},
+    paper_bgcolor:"#fff", plot_bgcolor:"#fff",
+  }, PLOT_CFG);
+}
+
+function drawRiskTable(dd){
+  const recent = dd.slice(-24);
+  document.getElementById("risk-table").innerHTML =
+    `<thead><tr><th>Date</th><th class="num">DARS Score</th><th class="num">High Risk</th>`+
+    `<th class="num">Components</th><th>Comparability Flag</th></tr></thead><tbody>`+
+    recent.map(r=>`<tr><td>${r.date.slice(0,7)}</td><td class="num">${fmt(r.dars_score)}</td>`+
+      `<td class="num">${r.high_risk_flag===null?"—":r.high_risk_flag}</td>`+
+      `<td class="num">${r.n_components_used??"—"}</td><td>${r.dars_comparability_flag||"—"}</td></tr>`).join("")+
+    `</tbody>`;
+}
+
+function drawBreakdown(dd, latest){
+  const x = dd.map(r=>r.date);
+  const traces = COMPONENTS.map(([key,label,color])=>({
+    x, y: dd.map(r=> r[key]===null ? null : r[key]*WEIGHTS[key]*100),
+    name: label, stackgroup:"one", mode:"lines", line:{width:0.5, color},
+    fillcolor: color, hovertemplate:`<b>%{x|%b %Y}</b><br>${label}: %{y:.1f}<extra></extra>`,
+  }));
+  Plotly.react("bd-chart", traces, {
+    font:PLOT_FONT, margin:{t:20,r:16,b:40,l:48}, height:500,
+    yaxis:{title:"Weighted contribution (points)"}, xaxis:{title:"Date"},
+    legend:{orientation:"h", y:-0.18}, paper_bgcolor:"#fff", plot_bgcolor:"#fff",
+  }, PLOT_CFG);
+
+  document.getElementById("bd-table").innerHTML =
+    `<thead><tr><th>Component</th><th class="num">Raw Score (0–1)</th><th class="num">Weight</th>`+
+    `<th class="num">Contribution (pts)</th></tr></thead><tbody>`+
+    COMPONENTS.map(([key,label])=>{
+      const raw = latest ? latest[key] : null;
+      const contrib = raw===null||!latest ? null : raw*WEIGHTS[key]*100;
+      return `<tr><td>${label}</td><td class="num">${fmt(raw,3)}</td>`+
+        `<td class="num">${(WEIGHTS[key]*100)}%</td><td class="num">${fmt(contrib,2)}</td></tr>`;
+    }).join("")+`</tbody>`;
+}
+
+function drawSensitivity(){
+  const row = DATA.sensitivity.find(r=>r.district===DISTRICT);
+  const el = document.getElementById("bd-sens");
+  if(!row){ el.innerHTML=`<tbody><tr><td>No sensitivity data for ${DISTRICT}.</td></tr></tbody>`; return; }
+  el.innerHTML =
+    `<thead><tr><th>District</th><th class="num">Equal vs Config</th><th class="num">Equal vs No-ICPI</th>`+
+    `<th class="num">Config vs No-ICPI</th><th class="num">N</th><th>Robustness</th></tr></thead><tbody>`+
+    `<tr><td>${row.district}</td><td class="num">${fmt(row.corr_equal_vs_config,3)}</td>`+
+    `<td class="num">${fmt(row.corr_equal_vs_no_icpi,3)}</td><td class="num">${fmt(row.corr_config_vs_no_icpi,3)}</td>`+
+    `<td class="num">${row.n_obs??"—"}</td><td>${row.robust_flag||"—"}</td></tr></tbody>`;
+}
+
+/* ---------- Validation ---------- */
+function renderValidation(){
+  const bt = DATA.backtest;
+  const labels = bt.map(r=>`${r.event_label.replace(/_/g," ")}<br>${r.district}`);
+  Plotly.react("val-chart", [
+    {type:"bar", name:"During event", x:labels, y:bt.map(r=>r.mean_dars_during), marker:{color:"#1F4E79"},
+      hovertemplate:"%{x}<br>Mean DARS: %{y:.1f}<extra>During</extra>"},
+    {type:"bar", name:"Outside event", x:labels, y:bt.map(r=>r.mean_dars_outside), marker:{color:"#A9D18E"},
+      hovertemplate:"%{x}<br>Mean DARS: %{y:.1f}<extra>Outside</extra>"},
+  ], {
+    font:PLOT_FONT, barmode:"group", height:500, margin:{t:20,r:16,b:80,l:48},
+    yaxis:{title:"Mean DARS Score"}, legend:{x:0.01,y:0.99},
+    paper_bgcolor:"#fff", plot_bgcolor:"#fff",
+  }, PLOT_CFG);
+
+  document.getElementById("val-table").innerHTML =
+    `<thead><tr><th>Event</th><th>District</th><th class="num">Signal Lift</th>`+
+    `<th class="num">HR Rate (During)</th><th class="num">HR Rate (Baseline)</th><th>Comparability</th></tr></thead><tbody>`+
+    bt.map(r=>{ const hi = r.signal_lift!==null && r.signal_lift>1.2;
+      return `<tr style="${hi?'background:#d4edda':''}"><td>${r.event_label.replace(/_/g," ")}</td><td>${r.district}</td>`+
+        `<td class="num">${fmt(r.signal_lift,3)}</td><td class="num">${fmt(r.high_risk_rate_during,3)}</td>`+
+        `<td class="num">${fmt(r.high_risk_rate_baseline,3)}</td><td>${r.dars_comparability_flag}</td></tr>`;
+    }).join("")+`</tbody>`;
+
+  const byD = {};
+  DATA.predictive.forEach(r=>{ (byD[r.district]=byD[r.district]||{}).district=r.district;
+    byD[r.district]["t"+r.lag_months]=r; });
+  document.getElementById("val-pred").innerHTML =
+    `<thead><tr><th>District</th><th class="num">Corr T+2</th><th class="num">P-value T+2</th>`+
+    `<th class="num">Corr T+3</th><th class="num">P-value T+3</th></tr></thead><tbody>`+
+    Object.values(byD).map(d=>`<tr><td>${d.district}</td>`+
+      `<td class="num">${fmt(d.t2?.pearson_r,3)}</td><td class="num">${fmt(d.t2?.p_value,4)}</td>`+
+      `<td class="num">${fmt(d.t3?.pearson_r,3)}</td><td class="num">${fmt(d.t3?.p_value,4)}</td></tr>`).join("")+
+    `</tbody>`;
+}
+
+/* ---------- Bulletin ---------- */
+function renderBulletin(){
+  const b = DATA.bulletin;
+  if(b.length && b[0].date) document.getElementById("bul-month").textContent = monthYear(b[0].date.slice(0,7));
+  document.getElementById("bul-cards").innerHTML = DATA.districts.map(name=>{
+    const r = b.find(x=>x.district===name); if(!r) return "";
+    const f = r.high_risk_flag;
+    const cls = f===1?"high":f===0?"normal":"na";
+    const pill = f===1?`<span class="pill high">⬆ HIGH RISK</span>`:f===0?`<span class="pill normal">✓ NORMAL</span>`:`<span class="pill na">— INSUFFICIENT DATA</span>`;
+    return `<div class="bcard"><h4>${name}</h4>`+
+      `<div class="score ${r.dars_score===null?"na":""}">${fmt(r.dars_score)}</div>`+
+      `<div style="margin:8px 0">${pill}</div>`+
+      (r.dars_threshold_75p!==null?`<div class="cap">Threshold: ${fmt(r.dars_threshold_75p)}</div>`:"")+
+      (r.dars_comparability_flag?`<div class="cap">Flag: ${r.dars_comparability_flag}</div>`:"")+
+      (r.action_note?`<div class="note ${cls}">${r.action_note}</div>`:"")+`</div>`;
+  }).join("");
+
+  document.getElementById("bul-download").onclick = ()=>{
+    const cols = Object.keys(DATA.bulletin[0]);
+    const csv = [cols.join(",")].concat(DATA.bulletin.map(r=>cols.map(c=>{
+      const v=r[c]; return v===null?"":/[",\n]/.test(String(v))?`"${String(v).replace(/"/g,'""')}"`:v;
+    }).join(","))).join("\n");
+    const url = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+    const a = Object.assign(document.createElement("a"),{href:url, download:"dars_bulletin_latest.csv"});
+    a.click(); URL.revokeObjectURL(url);
+  };
+}
+</script>
+</body>
+</html>
