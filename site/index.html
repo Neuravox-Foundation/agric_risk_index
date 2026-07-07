@@ -95,6 +95,8 @@
   .kpi .k { font-size: 11.5px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .6px; }
   .kpi .v { font-size: 30px; font-weight: 800; margin-top: 6px; letter-spacing: -.5px; line-height: 1.1; }
   .kpi .v.sm { font-size: 19px; }
+  .kpi .v .sep { font-size: 14px; font-weight: 600; color: var(--muted); margin: 0 9px; vertical-align: 4px; }
+  .kpi .cap { font-size: 12px; color: var(--muted); margin-top: 7px; font-weight: 500; }
 
   .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
     box-shadow: var(--shadow); padding: 10px 12px; }
@@ -308,12 +310,15 @@ function switchTab(id){
 /* Overview */
 function renderOverview(){
   const s = DATA.summary;
+  const yStart = s.date_start.slice(0,4), yEnd = s.date_end.slice(0,4);
+  const periodVal = `${yStart}<span class="sep">to</span>${yEnd}`;
+  const periodCap = `${monthYear(s.date_start.slice(0,7))} to ${monthYear(s.date_end.slice(0,7))}`;
   document.getElementById("ov-kpi").innerHTML = [
-    ["Months modelled", s.total_months.toLocaleString(), ""],
-    ["Districts covered", s.districts_covered, ""],
-    ["Data period", `${monthYear(s.date_start.slice(0,7))} to ${monthYear(s.date_end.slice(0,7))}`, "sm"],
-    ["High risk rate", fmt(s.high_risk_rate,1)+"%", ""],
-  ].map(([k,v,c])=>`<div class="kpi"><div class="k">${k}</div><div class="v ${c}">${v}</div></div>`).join("");
+    ["Months modelled", s.total_months.toLocaleString(), "", ""],
+    ["Districts covered", s.districts_covered, "", ""],
+    ["Data period", periodVal, "", periodCap],
+    ["High risk rate", fmt(s.high_risk_rate,1)+"%", "", ""],
+  ].map(([k,v,c,cap])=>`<div class="kpi"><div class="k">${k}</div><div class="v ${c}">${v}</div>${cap?`<div class="cap">${cap}</div>`:""}</div>`).join("");
 
   const rows = [
     ["Commodity volatility (CVI)","25%","WFP VAM price data","Gulu, Arua, Lira only"],
