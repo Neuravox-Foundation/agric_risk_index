@@ -54,7 +54,23 @@ python3 -m http.server 8799
    - **Build output directory:** `site`
 3. **Save and Deploy.** Every push to the default branch redeploys automatically.
 
-That's it. To use a custom domain, add it under the Pages project → **Custom domains**.
+That's it.
+
+## Custom domain: davars.org
+
+`davars.org` is already on Cloudflare (nameservers `tanner`/`lisa.ns.cloudflare.com`).
+Before this change it **301-redirected to a Streamlit Community Cloud app**. To point
+it at the new Pages site instead:
+
+1. **Remove the old redirect.** In the Cloudflare dashboard for the `davars.org`
+   zone, find and delete the rule sending the root to `*.streamlit.app`. Check, in
+   order: **Rules → Redirect Rules**, **Rules → Page Rules**, **Bulk Redirects**, and
+   any **Worker Route** on `davars.org/*`. There may also be a proxied `A`/`CNAME`
+   record on the root feeding that redirect — remove it too.
+2. **Attach the domain to Pages.** Pages project → **Custom domains** → **Set up a
+   domain** → add `davars.org`, then again for `www.davars.org`. Because Cloudflare
+   manages the zone, it creates the DNS records automatically and issues the TLS cert.
+3. Wait for the cert to go active (usually minutes), then load `https://davars.org`.
 
 ### Optional: regenerate data.json at build time
 
