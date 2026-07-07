@@ -1,0 +1,7 @@
+# Cloudflare Pages headers
+# HTML: always revalidate so redeploys show immediately.
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+# Data bundle: revalidate so a fresh pipeline run is picked up.
+/data.json
+  Cache-Control: public, max-age=0, must-revalidate
