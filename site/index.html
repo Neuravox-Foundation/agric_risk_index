@@ -164,7 +164,6 @@
   <button class="tab" data-tab="risk">District Risk</button>
   <button class="tab" data-tab="breakdown">Risk Breakdown</button>
   <button class="tab" data-tab="validation">Validation</button>
-  <button class="tab" data-tab="bulletin">IFRAD Bulletin</button>
 </div></div>
 
 <div class="wrap">
@@ -228,15 +227,6 @@
       instability. This is a diagnostic check of co movement, not a causal forecast.</p>
     <div class="tablewrap"><table id="val-pred"></table></div>
   </section>
-
-  <section class="panel" id="bulletin">
-    <h2>Current month risk bulletin</h2>
-    <h3 id="bul-month" style="margin-top:8px;color:var(--muted);font-weight:600"></h3>
-    <div class="cards" id="bul-cards"></div>
-    <button class="btn" id="bul-download">Download bulletin CSV</button>
-    <p class="foot">Generated from the DAVARS pipeline. Scores flagged <code>missing_price_component</code>
-      (Oyam, Nebbi) are computed from four of the five components and should be read with that limit in mind.</p>
-  </section>
 </div>
 <div class="pagefoot">DAVARS is a prototype agricultural volatility index for Northern Uganda. Hosted on Cloudflare Pages.</div>
 
@@ -299,7 +289,7 @@ function init(){
   renderAll();
 }
 
-function renderAll(){ renderOverview(); renderDistrict(); renderValidation(); renderBulletin(); }
+function renderAll(){ renderOverview(); renderDistrict(); renderValidation(); }
 
 function switchTab(id){
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab===id));
@@ -459,31 +449,6 @@ function renderValidation(){
   document.getElementById("val-pred").innerHTML =
     `<thead><tr><th>District</th><th class="num">Correlation T+2</th><th class="num">P value T+2</th><th class="num">Correlation T+3</th><th class="num">P value T+3</th></tr></thead><tbody>`+
     Object.values(byD).map(d=>`<tr><td>${d.district}</td><td class="num">${fmt(d.t2?.pearson_r,3)}</td><td class="num">${fmt(d.t2?.p_value,4)}</td><td class="num">${fmt(d.t3?.pearson_r,3)}</td><td class="num">${fmt(d.t3?.p_value,4)}</td></tr>`).join("")+`</tbody>`;
-}
-
-/* Bulletin */
-function renderBulletin(){
-  const b = DATA.bulletin;
-  if(b.length && b[0].date) document.getElementById("bul-month").textContent = monthYear(b[0].date.slice(0,7));
-  document.getElementById("bul-cards").innerHTML = DATA.districts.map(name=>{
-    const r = b.find(x=>x.district===name); if(!r) return "";
-    const f = r.high_risk_flag;
-    const cls = f===1?"high":f===0?"normal":"na";
-    const pill = f===1?`<span class="pill high">▲ High risk</span>`:f===0?`<span class="pill normal">✓ Normal</span>`:`<span class="pill na">Limited data</span>`;
-    return `<div class="bcard is-${cls}"><h4>${name}</h4>`+
-      `<div class="score ${r.dars_score===null?"na":""}">${fmt(r.dars_score)}</div>`+
-      `<div style="margin:10px 0">${pill}</div>`+
-      (r.dars_threshold_75p!==null?`<div class="cap">Threshold ${fmt(r.dars_threshold_75p)}</div>`:"")+
-      (r.dars_comparability_flag?`<div class="cap">${r.dars_comparability_flag.replace(/_/g," ")}</div>`:"")+
-      (r.action_note?`<div class="note ${cls}">${r.action_note}</div>`:"")+`</div>`;
-  }).join("");
-  document.getElementById("bul-download").onclick = ()=>{
-    const cols = Object.keys(DATA.bulletin[0]);
-    const csv = [cols.join(",")].concat(DATA.bulletin.map(r=>cols.map(c=>{ const v=r[c]; return v===null?"":/[",\n]/.test(String(v))?`"${String(v).replace(/"/g,'""')}"`:v; }).join(","))).join("\n");
-    const url = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
-    Object.assign(document.createElement("a"),{href:url, download:"dars_bulletin_latest.csv"}).click();
-    URL.revokeObjectURL(url);
-  };
 }
 </script>
 </body>
